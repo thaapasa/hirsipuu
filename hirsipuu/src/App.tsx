@@ -6,11 +6,11 @@ import { LetterSelector } from "./ui/LetterSelector";
 import { WordView } from "./ui/WordView";
 
 function App() {
-  const { word, position, selectLetter, selected } = useHangmanGame();
+  const { hiddenWord, position, selectLetter, selected } = useHangmanGame();
   return (
     <GameArea>
       <HangmanImage position={position} />
-      <WordView word={word} />
+      <WordView word={hiddenWord} />
       <LetterSelector selected={selected} selectLetter={selectLetter} />
     </GameArea>
   );
