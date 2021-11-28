@@ -31,7 +31,6 @@ const Letter = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  color: black;
   margin: 4px;
 `;
 
