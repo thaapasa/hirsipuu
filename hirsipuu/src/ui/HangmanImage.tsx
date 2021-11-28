@@ -12,20 +12,27 @@ export const HangmanImage: React.FC<GallowsImageProps> = ({
   onClick,
 }) => (
   <Container onClick={onClick}>
-    {range(0, position - 1).map((p) => (
-      <ImagePiece key={p} src={`images/puu-${Images[p]}.svg`} />
-    ))}
+    <ImageWrapper>
+      {range(0, Math.min(position - 1, Images.length - 1)).map((p) => (
+        <ImagePiece key={p} src={`images/puu-${Images[p]}.svg`} />
+      ))}
+    </ImageWrapper>
   </Container>
 );
 
+const ImageWrapper = styled.div`
+  width: 172px;
+  height: 232px;
+  position: relative;
+`;
+
 const Container = styled.div`
+  background-color: white;
+  width: 100%;
   display: flex;
   flex-direction: row;
-  flex: 1;
-  height: 300px;
-  box-sizing: border-box;
-  position: relative;
-  background-color: white;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ImagePiece = styled.img`

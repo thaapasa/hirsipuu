@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { HangmanImage } from "./ui/HangmanImage";
+import { LetterSelector } from "./ui/LetterSelector";
 import { WordView } from "./ui/WordView";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <GameArea>
       <HangmanImage position={pos} onClick={() => setPos(pos + 1)} />
       <WordView word="K_KK_K_PP_" />
+      <LetterSelector selected={["P", "R", "U"]} selectLetter={() => {}} />
     </GameArea>
   );
 }
