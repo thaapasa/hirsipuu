@@ -1,18 +1,20 @@
 import React from "react";
+import styled from "styled-components";
 import { HangmanImage } from "./ui/HangmanImage";
+import { WordView } from "./ui/WordView";
 
 function App() {
   const [pos, setPos] = React.useState(0);
   return (
-    <div className="App">
+    <GameArea>
       <HangmanImage position={pos} onClick={() => setPos(pos + 1)} />
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </header>
-    </div>
+      <WordView word="K_KK_K_PP_" />
+    </GameArea>
   );
 }
+
+const GameArea = styled.div`
+  padding: 16;
+`;
 
 export default App;

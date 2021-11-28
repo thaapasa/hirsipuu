@@ -24,7 +24,6 @@ const Container = styled.div`
   flex: 1;
   height: 300px;
   box-sizing: border-box;
-  margin: 16px;
   position: relative;
   background-color: white;
 `;
