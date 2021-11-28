@@ -10,7 +10,7 @@ function App() {
     <GameArea>
       <HangmanImage position={pos} onClick={() => setPos(pos + 1)} />
       <WordView word="K_KK_K_PP_" />
-      <LetterSelector selected={["P", "R", "U"]} selectLetter={() => {}} />
+      <LetterSelector selected={["K", "P", "R"]} selectLetter={() => {}} />
     </GameArea>
   );
 }

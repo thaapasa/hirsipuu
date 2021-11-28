@@ -13,7 +13,9 @@ export const LetterSelector: React.FC<LetterSelectorProps> = ({
   return (
     <Container>
       {Letters.map((l, i) => (
-        <Letter key={i}>{l}</Letter>
+        <Letter key={i} disabled={selected.includes(l)}>
+          {l}
+        </Letter>
       ))}
     </Container>
   );
