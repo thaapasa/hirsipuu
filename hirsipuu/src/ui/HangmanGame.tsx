@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useHangmanGame } from "../game/HangmanGame";
-import { HangmanImage } from "./HangmanImage";
+import { GameImage } from "./GameImage";
 import { LetterSelector } from "./LetterSelector";
 import { Tools } from "./Tools";
 import { WordView } from "./WordView";
@@ -18,7 +18,7 @@ export function HangmanGame() {
   } = useHangmanGame();
   return (
     <GameArea>
-      <HangmanImage position={position} state={state} />
+      <GameImage position={position} state={state} />
       <WordView word={hiddenWord} />
       <LetterSelector
         selected={selected}
