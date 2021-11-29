@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Letters } from "../game/Letters";
+import { Card } from "./Card";
 
 interface LetterSelectorProps {
   selected: string[];
@@ -25,8 +26,7 @@ export const LetterSelector: React.FC<LetterSelectorProps> = ({
   );
 };
 
-const Container = styled.div`
-  background-color: white;
+const Container = styled(Card)`
   padding: 8px;
   margin-top: 16px;
   text-align: center;

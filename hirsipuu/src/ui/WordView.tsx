@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { initArray } from "../util/values";
+import { Card } from "./Card";
 
 interface WordProps {
   word: string;
@@ -16,6 +17,16 @@ export const WordView: React.FC<WordProps> = ({ word }) => {
   );
 };
 
+const Container = styled(Card)`
+  background-color: white;
+  padding: 8px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Letter = styled.div`
   width: 22px;
   height: 28px;
@@ -25,14 +36,4 @@ const Letter = styled.div`
   align-items: center;
   align-self: stretch;
   color: black;
-`;
-
-const Container = styled.div`
-  background-color: white;
-  padding: 8px;
-  margin-top: 16px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 `;

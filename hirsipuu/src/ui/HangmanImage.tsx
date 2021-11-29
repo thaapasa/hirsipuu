@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { range } from "../util/numbers";
 import { useWindowDimensions } from "./hooks/useScreenSize";
 import { useElementSize } from "./hooks/useElementSize";
+import { Card } from "./Card";
 
 interface GallowsImageProps {
   position: number;
@@ -46,8 +47,7 @@ function useOptimumImageSize() {
   return { size: optimum, ref };
 }
 
-const Container = styled.div`
-  background-color: white;
+const Container = styled(Card)`
   display: flex;
   flex-direction: row;
   align-items: center;
