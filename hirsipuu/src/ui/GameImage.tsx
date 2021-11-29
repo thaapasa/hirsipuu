@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { useWindowDimensions } from "./hooks/useScreenSize";
 import { useElementSize } from "./hooks/useElementSize";
 import { Card } from "./Card";
-import { SuccessView } from "./SuccessView";
+import { VictoryImage } from "./VictoryImage";
 import { GameState } from "../game/HangmanGame";
 import { HangmanImage } from "./HangmanImage";
+import { DefeatImage } from "./DefeatImage";
 
 export const GameImage: React.FC<{
   position: number;
@@ -15,20 +16,19 @@ export const GameImage: React.FC<{
   return (
     <Container ref={ref} className={state}>
       {state === "victory" ? (
-        <SuccessView style={size} />
+        <VictoryImage style={size} />
       ) : (
         <HangmanImage position={position} size={size} />
       )}
+      {state === "defeat" ? <AbsDefeat style={size} /> : null}
     </Container>
   );
 };
 
 function useOptimumImageSize() {
   const { height: winHei } = useWindowDimensions();
-  const {
-    size: { width: elWid },
-    ref,
-  } = useElementSize();
+  const { size: elSize, ref } = useElementSize();
+  const elWid = elSize.width;
   const optimum = React.useMemo(() => {
     const maxWidth = elWid ?? 1;
     const maxHeight = Math.round((maxWidth * 232) / 172);
@@ -37,7 +37,12 @@ function useOptimumImageSize() {
     return { width, height };
   }, [elWid, winHei]);
 
-  return { size: optimum, ref };
+  const elementSize = {
+    width: elSize.width,
+    height: elSize.height || Math.round((elSize.width * 232) / 172),
+  };
+
+  return { size: optimum, ref, elementSize: elementSize };
 }
 
 const Container = styled(Card)`
@@ -47,4 +52,9 @@ const Container = styled(Card)`
   align-items: center;
   justify-content: center;
   align-self: stretch;
+  overflow: hidden;
+`;
+
+const AbsDefeat = styled(DefeatImage)`
+  position: absolute;
 `;

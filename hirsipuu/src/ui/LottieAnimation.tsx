@@ -3,8 +3,9 @@ import React from "react";
 
 export const LottieAnimation: React.FC<{
   path: string;
+  className?: string;
   style: React.CSSProperties;
-}> = ({ style, path }) => {
+}> = ({ style, path, className }) => {
   const ref = React.useRef<HTMLImageElement>(null);
   React.useEffect(() => {
     const a = Lottie.loadAnimation({
@@ -15,5 +16,5 @@ export const LottieAnimation: React.FC<{
     a.play();
   }, [path]);
 
-  return <div ref={ref} style={style} />;
+  return <div ref={ref} style={style} className={className} />;
 };

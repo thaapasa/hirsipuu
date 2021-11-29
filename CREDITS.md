@@ -15,4 +15,4 @@ It is licensed under Creative Commons: Attribution.
 
 ### Animations
 
-[Fireworks animation](https://lottiefiles.com/7393-fireworks#).
+- [Fireworks animation](https://lottiefiles.com/7393-fireworks)
