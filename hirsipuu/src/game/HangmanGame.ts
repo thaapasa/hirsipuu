@@ -1,6 +1,9 @@
 import React from "react";
 import { initArray, strToArr } from "../util/values";
+import { HangmanImages } from "./HangmanImages";
 import { getNewWord } from "./Words";
+
+export type GameState = "playing" | "victory" | "defeat";
 
 export function useHangmanGame() {
   const [word, setWord] = React.useState("");
@@ -45,7 +48,12 @@ export function useHangmanGame() {
       setPosition(position + 1);
     }
   }, [setSelected, setPosition, selected, position, word]);
-  const success = !hiddenWord.includes("_");
+  const state: GameState =
+    position >= HangmanImages.length
+      ? "defeat"
+      : hiddenWord.includes("_")
+      ? "playing"
+      : "victory";
 
   return {
     position,
@@ -55,7 +63,7 @@ export function useHangmanGame() {
     selectLetter,
     resetGame,
     guessWord,
-    success,
+    state,
   };
 }
 

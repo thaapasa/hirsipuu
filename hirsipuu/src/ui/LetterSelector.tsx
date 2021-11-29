@@ -1,18 +1,19 @@
 import styled from "styled-components";
+import { GameState } from "../game/HangmanGame";
 import { Letters } from "../game/Letters";
 import { Card } from "./Card";
 
 export const LetterSelector: React.FC<{
   selected: string[];
   selectLetter: (letter: string) => void;
-  disabled?: boolean;
-}> = ({ selected, selectLetter, disabled }) => {
+  state: GameState;
+}> = ({ selected, selectLetter, state }) => {
   return (
     <Container>
       {Letters.map((l, i) => (
         <Letter
           key={i}
-          disabled={selected.includes(l) || disabled}
+          disabled={selected.includes(l) || state !== "playing"}
           onClick={() => selectLetter(l)}
         >
           {l}

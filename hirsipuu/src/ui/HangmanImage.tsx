@@ -5,16 +5,17 @@ import { useWindowDimensions } from "./hooks/useScreenSize";
 import { useElementSize } from "./hooks/useElementSize";
 import { Card } from "./Card";
 import { SuccessView } from "./SuccessView";
+import { GameState } from "../game/HangmanGame";
 
 export const HangmanImage: React.FC<{
   position: number;
   onClick?: () => void;
-  success: boolean;
-}> = ({ position, onClick, success }) => {
+  state: GameState;
+}> = ({ position, onClick, state }) => {
   const { size, ref } = useOptimumImageSize();
   return (
-    <Container onClick={onClick} ref={ref} className={success ? "success" : ""}>
-      {success ? (
+    <Container onClick={onClick} ref={ref} className={state}>
+      {state === "victory" ? (
         <SuccessView {...size} />
       ) : (
         <ImageWrapper style={size}>
@@ -49,6 +50,7 @@ function useOptimumImageSize() {
 }
 
 const Container = styled(Card)`
+  margin-top: 8px;
   display: flex;
   flex-direction: row;
   align-items: center;
