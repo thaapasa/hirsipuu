@@ -18,10 +18,12 @@ export const WordView: React.FC<WordProps> = ({ word }) => {
 
 const Letter = styled.div`
   width: 22px;
-  height: 24px;
+  height: 28px;
+  font-size: 16pt;
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: stretch;
   color: black;
 `;
 

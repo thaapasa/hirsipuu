@@ -25,18 +25,20 @@ export const LetterSelector: React.FC<LetterSelectorProps> = ({
   );
 };
 
-const Letter = styled.button`
-  width: 32px;
-  height: 32px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 4px;
-`;
-
 const Container = styled.div`
   background-color: white;
   padding: 8px;
   margin-top: 16px;
   text-align: center;
+  align-self: stretch;
+`;
+
+const Letter = styled.button`
+  width: 36px;
+  height: 36px;
+  font-size: 16pt;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4px;
 `;

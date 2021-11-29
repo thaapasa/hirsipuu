@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { range } from "../util/numbers";
+import { useWindowDimensions } from "./hooks/useScreenSize";
+import { useElementSize } from "./hooks/useElementSize";
 
 interface GallowsImageProps {
   position: number;
@@ -10,34 +12,54 @@ interface GallowsImageProps {
 export const HangmanImage: React.FC<GallowsImageProps> = ({
   position,
   onClick,
-}) => (
-  <Container onClick={onClick}>
-    <ImageWrapper>
-      {range(0, Math.min(position - 1, Images.length - 1)).map((p) => (
-        <ImagePiece key={p} src={`images/puu-${Images[p]}.svg`} />
-      ))}
-    </ImageWrapper>
-  </Container>
-);
+}) => {
+  const { size, ref } = useOptimumImageSize();
+  return (
+    <Container onClick={onClick} ref={ref}>
+      <ImageWrapper style={size}>
+        {range(0, Math.min(position - 1, Images.length - 1)).map((p) => (
+          <ImagePiece
+            key={p}
+            src={`images/puu-${Images[p]}.svg`}
+            style={size}
+          />
+        ))}
+      </ImageWrapper>
+    </Container>
+  );
+};
 
-const ImageWrapper = styled.div`
-  width: 172px;
-  height: 232px;
-  position: relative;
-`;
+function useOptimumImageSize() {
+  const { height: winHei } = useWindowDimensions();
+  const {
+    size: { width: elWid },
+    ref,
+  } = useElementSize();
+  const optimum = React.useMemo(() => {
+    const maxWidth = elWid ?? 1;
+    const maxHeight = Math.round((maxWidth * 232) / 172);
+    const height = Math.min(maxHeight, winHei * 0.45);
+    const width = height === maxHeight ? maxWidth : (height * 172) / 232;
+    return { width, height };
+  }, [elWid, winHei]);
+
+  return { size: optimum, ref };
+}
 
 const Container = styled.div`
   background-color: white;
-  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  align-self: stretch;
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
 `;
 
 const ImagePiece = styled.img`
-  width: 172px;
-  height: 232px;
   position: absolute;
   top: 0;
   left: 0;
