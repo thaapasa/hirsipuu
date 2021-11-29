@@ -1,6 +1,7 @@
 import React from "react";
 import { initArray, strToArr } from "../util/values";
 import { HangmanImages } from "./HangmanImages";
+import { Letters } from "./Letters";
 import { GameStatus } from "./State";
 import { getNewWord } from "./Words";
 
@@ -47,6 +48,16 @@ export function useHangmanGame() {
     setSelected([]);
   }, [setWord, setPosition, setSelected]);
 
+  const resetGameNewWord = React.useCallback(() => {
+    const prompt = window.prompt("Syötä sana:")?.trim();
+    if (!prompt?.length) return;
+    const newW = prompt.toLocaleUpperCase();
+    console.log("Sana on", newW);
+    setWord(newW);
+    setPosition(0);
+    setSelected([]);
+  }, [setWord, setPosition, setSelected]);
+
   const guessWord = React.useCallback(() => {
     const guess = window.prompt("Minkä sanan arvaat?");
     if (guess?.trim().toLocaleUpperCase() === word) {
@@ -63,6 +74,7 @@ export function useHangmanGame() {
     selected,
     selectLetter,
     resetGame,
+    resetGameNewWord,
     guessWord,
     state,
   };
@@ -70,7 +82,9 @@ export function useHangmanGame() {
 
 function hideLetters(word: string, selectedLetters: string[]): string {
   return initArray(word.length, (p) =>
-    selectedLetters.includes(word[p]) ? word[p] : "_"
+    !Letters.includes(word[p]) || selectedLetters.includes(word[p])
+      ? word[p]
+      : "_"
   ).join("");
 }
 

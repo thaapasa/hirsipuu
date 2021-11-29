@@ -13,6 +13,7 @@ export function HangmanGame() {
     selectLetter,
     selected,
     resetGame,
+    resetGameNewWord,
     guessWord,
     state,
   } = useHangmanGame();
@@ -25,7 +26,12 @@ export function HangmanGame() {
         selectLetter={selectLetter}
         state={state}
       />
-      <Tools reset={resetGame} guess={guessWord} state={state} />
+      <Tools
+        reset={resetGame}
+        resetNewWord={resetGameNewWord}
+        guess={guessWord}
+        state={state}
+      />
     </GameArea>
   );
 }
