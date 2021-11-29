@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { initArray } from "../util/values";
+import { strToArr } from "../util/values";
 import { Card } from "./Card";
 
 interface WordProps {
@@ -7,7 +7,7 @@ interface WordProps {
 }
 
 export const WordView: React.FC<WordProps> = ({ word }) => {
-  const letters = initArray(word.length, (p) => word[p]);
+  const letters = strToArr(word);
   return (
     <Container>
       {letters.map((l, i) => (
