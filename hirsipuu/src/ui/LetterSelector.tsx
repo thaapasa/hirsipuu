@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { GameState } from "../game/HangmanGame";
 import { Letters } from "../game/Letters";
+import { GameStatus } from "../game/State";
 import { Card } from "./Card";
 
 export const LetterSelector: React.FC<{
   selected: string[];
   selectLetter: (letter: string) => void;
-  state: GameState;
+  state: GameStatus;
 }> = ({ selected, selectLetter, state }) => {
   return (
     <Container>

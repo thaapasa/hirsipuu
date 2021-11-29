@@ -1,19 +1,34 @@
 import React from "react";
 import { initArray, strToArr } from "../util/values";
 import { HangmanImages } from "./HangmanImages";
+import { GameStatus } from "./State";
 import { getNewWord } from "./Words";
-
-export type GameState = "playing" | "victory" | "defeat";
 
 export function useHangmanGame() {
   const [word, setWord] = React.useState("");
+  const [position, setPosition] = React.useState(0);
+  const [selected, setSelected] = React.useState<string[]>([]);
+
+  // Calculate computed state
+  const hiddenWord = React.useMemo(
+    () => hideLetters(word, selected),
+    [word, selected]
+  );
+  const state: GameStatus =
+    position >= HangmanImages.length
+      ? "defeat"
+      : hiddenWord.includes("_")
+      ? "playing"
+      : "victory";
+
+  // Select initial word
   React.useEffect(() => {
     const word = getNewWord();
     console.log("Sana on", word);
     setWord(word);
   }, [setWord]);
-  const [position, setPosition] = React.useState(0);
-  const [selected, setSelected] = React.useState<string[]>([]);
+
+  // Create game actions
   const selectLetter = React.useCallback(
     (letter: string) => {
       setSelected([...selected, letter]);
@@ -23,10 +38,7 @@ export function useHangmanGame() {
     },
     [word, selected, position]
   );
-  const hiddenWord = React.useMemo(
-    () => hideLetters(word, selected),
-    [word, selected]
-  );
+
   const resetGame = React.useCallback(() => {
     const newW = getNewWord();
     console.log("Sana on", newW);
@@ -38,22 +50,11 @@ export function useHangmanGame() {
   const guessWord = React.useCallback(() => {
     const guess = window.prompt("Minkä sanan arvaat?");
     if (guess?.trim().toLocaleUpperCase() === word) {
-      const letters = strToArr(word);
-      const newS = letters.reduce(
-        (s, l) => (s.includes(l) ? s : [...s, l]),
-        selected
-      );
-      setSelected(newS);
+      setSelected(addLettersFromWord(selected, word));
     } else {
       setPosition(position + 1);
     }
   }, [setSelected, setPosition, selected, position, word]);
-  const state: GameState =
-    position >= HangmanImages.length
-      ? "defeat"
-      : hiddenWord.includes("_")
-      ? "playing"
-      : "victory";
 
   return {
     position,
@@ -71,4 +72,9 @@ function hideLetters(word: string, selectedLetters: string[]): string {
   return initArray(word.length, (p) =>
     selectedLetters.includes(word[p]) ? word[p] : "_"
   ).join("");
+}
+
+function addLettersFromWord(selected: string[], word: string) {
+  const letters = strToArr(word);
+  return letters.reduce((s, l) => (s.includes(l) ? s : [...s, l]), selected);
 }

@@ -4,13 +4,13 @@ import { useWindowDimensions } from "./hooks/useScreenSize";
 import { useElementSize } from "./hooks/useElementSize";
 import { Card } from "./Card";
 import { VictoryImage } from "./VictoryImage";
-import { GameState } from "../game/HangmanGame";
 import { HangmanImage } from "./HangmanImage";
 import { DefeatImage } from "./DefeatImage";
+import { GameStatus } from "../game/State";
 
 export const GameImage: React.FC<{
   position: number;
-  state: GameState;
+  state: GameStatus;
 }> = ({ position, state }) => {
   const { size, ref } = useOptimumImageSize();
   return (

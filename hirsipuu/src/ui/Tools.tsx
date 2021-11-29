@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { GameState } from "../game/HangmanGame";
+import { GameStatus } from "../game/State";
 
 export const Tools: React.FC<{
   reset: () => void;
   guess: () => void;
-  state: GameState;
+  state: GameStatus;
 }> = ({ reset, guess, state }) => (
   <Container>
     <button onClick={reset}>Uusi peli</button>
