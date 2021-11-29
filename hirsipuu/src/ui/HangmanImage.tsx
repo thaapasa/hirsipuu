@@ -4,28 +4,29 @@ import { range } from "../util/numbers";
 import { useWindowDimensions } from "./hooks/useScreenSize";
 import { useElementSize } from "./hooks/useElementSize";
 import { Card } from "./Card";
+import { SuccessView } from "./SuccessView";
 
-interface GallowsImageProps {
+export const HangmanImage: React.FC<{
   position: number;
   onClick?: () => void;
-}
-
-export const HangmanImage: React.FC<GallowsImageProps> = ({
-  position,
-  onClick,
-}) => {
+  success: boolean;
+}> = ({ position, onClick, success }) => {
   const { size, ref } = useOptimumImageSize();
   return (
-    <Container onClick={onClick} ref={ref}>
-      <ImageWrapper style={size}>
-        {range(0, Math.min(position - 1, Images.length - 1)).map((p) => (
-          <ImagePiece
-            key={p}
-            src={`images/puu-${Images[p]}.svg`}
-            style={size}
-          />
-        ))}
-      </ImageWrapper>
+    <Container onClick={onClick} ref={ref} className={success ? "success" : ""}>
+      {success ? (
+        <SuccessView {...size} />
+      ) : (
+        <ImageWrapper style={size}>
+          {range(0, Math.min(position - 1, Images.length - 1)).map((p) => (
+            <ImagePiece
+              key={p}
+              src={`images/puu-${Images[p]}.svg`}
+              style={size}
+            />
+          ))}
+        </ImageWrapper>
+      )}
     </Container>
   );
 };

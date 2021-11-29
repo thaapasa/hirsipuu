@@ -45,6 +45,7 @@ export function useHangmanGame() {
       setPosition(position + 1);
     }
   }, [setSelected, setPosition, selected, position, word]);
+  const success = !hiddenWord.includes("_");
 
   return {
     position,
@@ -54,6 +55,7 @@ export function useHangmanGame() {
     selectLetter,
     resetGame,
     guessWord,
+    success,
   };
 }
 

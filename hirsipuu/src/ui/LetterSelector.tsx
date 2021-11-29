@@ -2,21 +2,17 @@ import styled from "styled-components";
 import { Letters } from "../game/Letters";
 import { Card } from "./Card";
 
-interface LetterSelectorProps {
+export const LetterSelector: React.FC<{
   selected: string[];
   selectLetter: (letter: string) => void;
-}
-
-export const LetterSelector: React.FC<LetterSelectorProps> = ({
-  selected,
-  selectLetter,
-}) => {
+  disabled?: boolean;
+}> = ({ selected, selectLetter, disabled }) => {
   return (
     <Container>
       {Letters.map((l, i) => (
         <Letter
           key={i}
-          disabled={selected.includes(l)}
+          disabled={selected.includes(l) || disabled}
           onClick={() => selectLetter(l)}
         >
           {l}

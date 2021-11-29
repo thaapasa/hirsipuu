@@ -7,13 +7,24 @@ import { Tools } from "./ui/Tools";
 import { WordView } from "./ui/WordView";
 
 function App() {
-  const { hiddenWord, position, selectLetter, selected, resetGame, guessWord } =
-    useHangmanGame();
+  const {
+    hiddenWord,
+    position,
+    selectLetter,
+    selected,
+    resetGame,
+    guessWord,
+    success,
+  } = useHangmanGame();
   return (
     <GameArea>
-      <HangmanImage position={position} />
+      <HangmanImage position={position} success={success} />
       <WordView word={hiddenWord} />
-      <LetterSelector selected={selected} selectLetter={selectLetter} />
+      <LetterSelector
+        selected={selected}
+        selectLetter={selectLetter}
+        disabled={success}
+      />
       <Tools reset={resetGame} guess={guessWord} />
     </GameArea>
   );
