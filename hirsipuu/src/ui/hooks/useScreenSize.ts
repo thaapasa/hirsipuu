@@ -2,17 +2,21 @@ import React from "react";
 
 export function useWindowDimensions() {
   const [size, setSize] = React.useState({
-    width: window.document.body.offsetWidth,
-    height: window.document.body.offsetHeight,
+    width: window.innerWidth,
+    height: window.innerHeight,
   });
 
   React.useEffect(() => {
     const listener = () => {
-      setSize({
-        width: window.document.body.offsetWidth,
-        height: window.document.body.offsetHeight,
-      });
+      const size = {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      };
+      // Update size, just in case initial size obtained on creation
+      // is incorrect
+      setSize(size);
     };
+    listener();
     window.addEventListener("resize", listener);
     return () => window.removeEventListener("resize", listener);
   }, [setSize]);
