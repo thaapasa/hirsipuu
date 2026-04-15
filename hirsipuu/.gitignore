@@ -2,14 +2,25 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
+
+# yarn berry (PnP)
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# production
+/dist
+/build
 
 # testing
 /coverage
 
-# production
-/build
+# tsc composite build info
+*.tsbuildinfo
 
 # misc
 .DS_Store

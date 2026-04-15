@@ -8,7 +8,7 @@ Hirsipuu is a Finnish-language hangman web game. The UI strings (prompts, logs) 
 
 ## Layout
 
-The application lives in the `hirsipuu/` subdirectory (Create React App + TypeScript). All `yarn` commands must be run from there, not the repo root.
+The application lives in the `hirsipuu/` subdirectory (Vite + React + TypeScript). All `yarn` commands must be run from there, not the repo root.
 
 The top-level `assets/images/` contains the canonical SVG source pieces. `hirsipuu/public/images/` holds copies that the app actually loads at runtime — changes to the hangman artwork need to be reflected in both places.
 
@@ -16,13 +16,16 @@ The top-level `assets/images/` contains the canonical SVG source pieces. `hirsip
 
 All commands run from `hirsipuu/`:
 
-- `yarn start` — dev server at http://localhost:3000
-- `yarn build` — production build
-- `yarn test` — interactive Jest watch mode (CRA default)
-- `yarn test -- --watchAll=false` — single non-watch run
-- `yarn test -- <pathPattern>` — run a single test file
+- `yarn dev` — Vite dev server at http://localhost:3000
+- `yarn build` — type-check with tsc then `vite build` to `dist/`
+- `yarn preview` — serve the production build
+- `yarn test` — Vitest watch mode (jsdom env)
+- `yarn test:run` — single non-watch run
+- `yarn test:run <pathPattern>` — run a single test file
+- `yarn lint` — ESLint flat config (type-aware via `typescript-eslint`)
+- `yarn format` — Prettier across the project
 
-Lint/format: ESLint (CRA config + `prettier/prettier: error`) runs inline during `yarn start`/`yarn test`; there is no standalone lint script.
+Vitest and lottie-web: jsdom can't render canvas, so any test that imports a module which loads `lottie-web` at top level (e.g. `App.tsx` via the victory/defeat components) must stub it with `vi.mock("lottie-web", ...)`. See `src/App.test.tsx` for the pattern.
 
 ## Architecture
 
