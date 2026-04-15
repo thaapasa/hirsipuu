@@ -7,6 +7,10 @@ export default defineConfig({
     port: 3000,
     open: true,
   },
+  build: {
+    outDir: "../docs",
+    emptyOutDir: true,
+  },
   test: {
     environment: "jsdom",
     globals: true,

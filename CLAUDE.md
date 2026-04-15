@@ -17,7 +17,7 @@ The top-level `assets/images/` contains the canonical SVG source pieces. `hirsip
 All commands run from `hirsipuu/`:
 
 - `yarn dev` — Vite dev server at http://localhost:3000
-- `yarn build` — type-check with tsc then `vite build` to `dist/`
+- `yarn build` — type-check with tsc then `vite build` into the repo-root `docs/` directory (that folder is checked in and served as the website's document root)
 - `yarn preview` — serve the production build
 - `yarn test` — Vitest watch mode (jsdom env)
 - `yarn test:run` — single non-watch run
