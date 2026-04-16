@@ -7,7 +7,7 @@ Finnish-language hangman game, built with Vite + React + TypeScript.
 Run from the `hirsipuu/` directory:
 
 - `yarn dev` — start the Vite dev server on http://localhost:3000
-- `yarn build` — type-check and produce a production bundle in the repo-root `docs/` directory (tracked in git; deploy by serving that folder as the web root)
+- `yarn build` — type-check and produce a production bundle in the repo-root `site/` directory (tracked in git; deploy by serving that folder as the web root)
 - `yarn preview` — serve the production bundle locally
 - `yarn test` — run Vitest in watch mode
 - `yarn test:run` — run Vitest once (for CI)
